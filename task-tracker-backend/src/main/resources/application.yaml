@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: task-tracker-backend
+
+  datasource:
+    url: jdbc:postgresql://db:5432/task_tracker
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+logging:
+  level:
+    root: info
