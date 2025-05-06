@@ -1,8 +1,9 @@
 package com.isa.tasktrackerbackend.security.dto;
 
-import lombok.Value;
+import java.util.Map;
 
-@Value
-public class ResponseDto {
-    String accessToken;
+public record ResponseDto(String accessToken, String message, Map<String, String> errors) {
+    public ResponseDto(String accessToken, String message) {
+        this(accessToken, message, null);
+    }
 }
