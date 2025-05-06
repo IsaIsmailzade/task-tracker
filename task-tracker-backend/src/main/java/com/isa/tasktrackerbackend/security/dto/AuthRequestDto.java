@@ -9,7 +9,7 @@ import lombok.Data;
 public class AuthRequestDto {
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Invalid email format")
-    private String username;
+    private String email;
 
     @NotBlank(message = "Password must not be blank")
     @Size(min = 8, message = "Password must be at least 8 characters")
