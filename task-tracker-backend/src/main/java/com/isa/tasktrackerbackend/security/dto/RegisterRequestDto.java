@@ -1,5 +1,6 @@
 package com.isa.tasktrackerbackend.security.dto;
 
+import com.isa.tasktrackerbackend.annotation.PasswordsMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@PasswordsMatch
 public class RegisterRequestDto {
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Invalid email format")
