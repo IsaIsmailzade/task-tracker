@@ -6,6 +6,7 @@ import com.isa.tasktrackerbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +25,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-
     private final JwtFilter jwtFilter;
     private final UserService userService;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
@@ -42,10 +42,10 @@ public class WebSecurityConfig {
                                 "/swagger-resources",
                                 "/configuration/ui",
                                 "/configuration/security",
-                                "/webjars/**",
-                                "/user/**",
-                                "/auth/login/**",
-                                "/")
+                                "/webjars/**"
+                        )
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login/**", "/user")
                         .permitAll()
                         .requestMatchers("admin").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
@@ -55,8 +55,7 @@ public class WebSecurityConfig {
                     e.authenticationEntryPoint(new HttpStatusEntryPoint(UNAUTHORIZED));
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(logout -> logout.logoutUrl("logout"));
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
