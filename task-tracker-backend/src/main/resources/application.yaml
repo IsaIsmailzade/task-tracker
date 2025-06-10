@@ -10,9 +10,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     open-in-view: false
+
+task-tracker-backend:
+  jwt:
+    secret_key: 78fb765fe81550e37f47eaadeb3a878f9958171ad395d0a548333ce46f377837ff587b67346f6ba7170b1ea7dc3b837ce2e3a010233b2a4a74b7d7b530d252a1
+    access_token_expiration: 1d
 
 logging:
   level:
