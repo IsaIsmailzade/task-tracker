@@ -42,7 +42,7 @@ public class WebSecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login/**", "/user")
                         .permitAll()
-                        .requestMatchers("admin").hasAuthority("ADMIN")
+                        .requestMatchers("/admin").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .userDetailsService(userService)
                 .exceptionHandling(e -> {
