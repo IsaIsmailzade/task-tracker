@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: task-tracker-email-sender
+
+  kafka:
+    bootstrap-servers: kafka:29092
+    consumer:
+      group-id: email-sender-consumer
+      auto-offset-reset: earliest
+    topic:
+      EMAIL_SENDING_TASKS
+    template:
+      default-topic: EMAIL_SENDING_TASKS
