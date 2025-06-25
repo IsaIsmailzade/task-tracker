@@ -31,6 +31,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "com.isa.tasktrackerbackend.dto");
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, MessageDto.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 
@@ -39,14 +40,7 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<Long, MessageDto> consumerFactory() {
-        JsonDeserializer<MessageDto> jsonDeserializer = new JsonDeserializer<>(MessageDto.class);
-        String pathToDtoPackage = MessageDto.class.getPackageName();
-        jsonDeserializer.addTrustedPackages(pathToDtoPackage);
-        return new DefaultKafkaConsumerFactory<>(
-                consumerConfigs(),
-                new LongDeserializer(),
-                jsonDeserializer
-        );
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
     @Bean
