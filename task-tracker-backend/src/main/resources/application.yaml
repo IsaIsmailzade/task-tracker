@@ -14,9 +14,15 @@ spring:
     show-sql: true
     open-in-view: false
 
+  kafka:
+    bootstrap-servers: kafka:29092
+    topic: EMAIL_SENDING_TASKS
+    template:
+      default-topic: EMAIL_SENDING_TASKS
+
 task-tracker-backend:
   jwt:
-    secret_key: 78fb765fe81550e37f47eaadeb3a878f9958171ad395d0a548333ce46f377837ff587b67346f6ba7170b1ea7dc3b837ce2e3a010233b2a4a74b7d7b530d252a1
+    secret_key: 31d16798f9eb4e38b82687846e5f7d67a12a5e016244a730aeff5a2a26db0da1
     access_token_expiration: 1d
 
 logging:
