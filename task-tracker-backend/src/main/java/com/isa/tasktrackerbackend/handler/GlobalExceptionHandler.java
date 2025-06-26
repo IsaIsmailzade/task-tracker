@@ -38,7 +38,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDto> handleGenericException(Exception e) {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred");
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "An unexpected error occurred"
+        );
         return new ResponseEntity<>(errorResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -51,7 +54,11 @@ public class GlobalExceptionHandler {
         for (ObjectError error : e.getBindingResult().getGlobalErrors()) {
             errors.put(error.getObjectName(), error.getDefaultMessage());
         }
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.BAD_REQUEST.value(), "Validation failed", errors);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(
+                HttpStatus.BAD_REQUEST.value(),
+                "Validation failed",
+                errors
+        );
         return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
     }
 }
