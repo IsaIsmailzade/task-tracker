@@ -47,7 +47,7 @@ public class AuthService {
 
         MessageDto messageDto = new MessageDto(
                 request.getEmail(),
-                "TaskTracker",
+                "Task Tracker",
                 "Thank you for registering on our website!"
         );
 
