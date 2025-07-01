@@ -10,5 +10,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "spring.kafka")
 public class KafkaTopicProperties {
-    String topic;
+    private String topic;
 }
