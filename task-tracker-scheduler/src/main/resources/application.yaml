@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: task-tracker-scheduler
+
+  kafka:
+    bootstrap-servers: kafka:29092
+    topic: EMAIL_SENDING_TASKS
+
+scheduler:
+  task-service:
+    tasks-count-limit: 5
+  message-service:
+    message-title: 'Task Tracker: Day''s Report'
+  report-service:
+    cron: 0 0 0 * * ?
+    cron-new: '@daily'
