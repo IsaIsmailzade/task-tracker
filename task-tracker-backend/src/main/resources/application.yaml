@@ -17,8 +17,6 @@ spring:
   kafka:
     bootstrap-servers: kafka:29092
     topic: EMAIL_SENDING_TASKS
-    template:
-      default-topic: EMAIL_SENDING_TASKS
 
 task-tracker-backend:
   jwt:
