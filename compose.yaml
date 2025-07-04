@@ -18,7 +18,7 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
+  backend-service:
     build: task-tracker-backend
     ports:
       - "8081:8080"
