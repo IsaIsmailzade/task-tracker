@@ -1,16 +1,14 @@
 package com.isa.tasktrackeremailsender.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class MessageDto {
-    String email;
-    String title;
-    String message;
+    private String email;
+    private String title;
+    private String message;
 }
