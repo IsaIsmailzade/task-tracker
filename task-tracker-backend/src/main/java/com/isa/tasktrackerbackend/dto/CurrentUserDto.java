@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CurrentUserDto {
-    Long id;
-    String email;
+    private Long id;
+    private String email;
 }

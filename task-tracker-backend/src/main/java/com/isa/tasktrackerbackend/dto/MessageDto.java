@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MessageDto {
-    String email;
-    String title;
-    String message;
+    private String email;
+    private String title;
+    private String message;
 }
