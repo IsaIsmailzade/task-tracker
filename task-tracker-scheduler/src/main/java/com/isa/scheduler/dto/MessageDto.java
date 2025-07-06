@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class MessageDto {
-    String email;
-    String title;
-    String message;
+    private String email;
+    private String title;
+    private String message;
 }
