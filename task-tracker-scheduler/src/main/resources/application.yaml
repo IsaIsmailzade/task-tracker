@@ -2,15 +2,24 @@ spring:
   application:
     name: task-tracker-scheduler
 
+  datasource:
+    url: jdbc:postgresql://db:5432/task_tracker
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    open-in-view: false
+
   kafka:
     bootstrap-servers: kafka:29092
     topic: EMAIL_SENDING_TASKS
 
 scheduler:
-  task-service:
-    tasks-count-limit: 5
-  message-service:
-    message-title: 'Task Tracker: Day''s Report'
-  report-service:
-    cron: 0 0 0 * * ?
-    cron-new: '@daily'
+  tasks-count-limit: 5
+  message-title: 'Task Tracker: Day''s Report'
+  cron: 0 0 0 * * ?
+  cron-new: '@daily'
