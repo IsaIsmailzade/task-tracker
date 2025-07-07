@@ -37,8 +37,9 @@ public class KafkaConsumerConfig {
     @Bean
     public ConsumerFactory<Long, MessageDto> consumerFactory() {
         JsonDeserializer<MessageDto> jsonDeserializer = new JsonDeserializer<>(MessageDto.class);
-        String pathToDtoPackage = "com.isa.tasktrackerbackend.dto";
-        jsonDeserializer.addTrustedPackages(pathToDtoPackage);
+        String pathToBackendDtoPackage = "com.isa.tasktrackerbackend.dto";
+        String pathToSchedulerDtoPackage = "com.isa.scheduler.dto";
+        jsonDeserializer.addTrustedPackages(pathToBackendDtoPackage, pathToSchedulerDtoPackage);
         jsonDeserializer.setUseTypeHeaders(false);
         return new DefaultKafkaConsumerFactory<>(
                 consumerConfigs(),
@@ -48,8 +49,9 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Long,
-            MessageDto>> kafkaListenerContainerFactory() {
+    public KafkaListenerContainerFactory<
+            ConcurrentMessageListenerContainer<Long, MessageDto>
+            > kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Long, MessageDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
