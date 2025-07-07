@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS tasks
     id           BIGSERIAL PRIMARY KEY,
     title        VARCHAR(255) NOT NULL,
     description  VARCHAR(255),
-    status       VARCHAR(64),
+    status       VARCHAR(64) NOT NULL,
     completed_at TIMESTAMP,
     user_id      BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
