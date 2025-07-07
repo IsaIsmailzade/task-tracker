@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerService {
     private final MailSenderService mailSenderService;
 
-    @KafkaListener(topics = "EMAIL_SENDING_TASKS")
+    @KafkaListener(topics = "${spring.kafka.topic}")
     public void consumeEmailSendingMessage(MessageDto messageDto) {
         mailSenderService.sendMail(messageDto);
     }
