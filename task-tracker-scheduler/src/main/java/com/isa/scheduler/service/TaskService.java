@@ -1,6 +1,5 @@
 package com.isa.scheduler.service;
 
-import com.isa.scheduler.config.SchedulerProperties;
 import com.isa.scheduler.model.Task;
 import com.isa.scheduler.model.TaskStatus;
 import com.isa.scheduler.model.User;
@@ -15,14 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final SchedulerProperties schedulerProperties;
 
     public List<String> getUncompletedTasksByUser(User user) {
         return taskRepository.findAllByUser(user).stream()
                 .filter(task -> task.getTaskStatus().equals(TaskStatus.PENDING)
                         && task.getCompletedAt() == null)
                 .map(Task::getTitle)
-                .limit(schedulerProperties.getTasksCountLimit())
                 .toList();
     }
 
@@ -34,7 +31,6 @@ public class TaskService {
                         && task.getCompletedAt() != null
                         && task.getCompletedAt().isAfter(yesterday))
                 .map(Task::getTitle)
-                .limit(schedulerProperties.getTasksCountLimit())
                 .toList();
     }
 }
