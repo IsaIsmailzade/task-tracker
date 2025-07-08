@@ -15,14 +15,6 @@ import java.util.List;
 public class TaskService {
     private final TaskRepository taskRepository;
 
-    public List<String> getUncompletedTasksByUser(User user) {
-        return taskRepository.findAllByUser(user).stream()
-                .filter(task -> task.getTaskStatus().equals(TaskStatus.PENDING)
-                        && task.getCompletedAt() == null)
-                .map(Task::getTitle)
-                .toList();
-    }
-
     public List<String> getCompletedTasksByUser(User user) {
         LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 
@@ -30,6 +22,14 @@ public class TaskService {
                 .filter(task -> task.getTaskStatus().equals(TaskStatus.COMPLETED)
                         && task.getCompletedAt() != null
                         && task.getCompletedAt().isAfter(yesterday))
+                .map(Task::getTitle)
+                .toList();
+    }
+
+    public List<String> getUncompletedTasksByUser(User user) {
+        return taskRepository.findAllByUser(user).stream()
+                .filter(task -> task.getTaskStatus().equals(TaskStatus.PENDING)
+                        && task.getCompletedAt() == null)
                 .map(Task::getTitle)
                 .toList();
     }
