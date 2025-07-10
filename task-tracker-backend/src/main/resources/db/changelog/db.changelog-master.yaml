@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/changelog/2025-06-10-create-tables.sql
+  - include:
+      file: db/changelog/2025-07-04-insert-users-and-tasks-data.sql
