@@ -3,10 +3,10 @@ spring:
     name: task-tracker-backend
 
   datasource:
-    url: jdbc:postgresql://db:5432/task_tracker
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
 
   jpa:
     hibernate:
@@ -15,13 +15,13 @@ spring:
     open-in-view: false
 
   kafka:
-    bootstrap-servers: kafka:29092
-    topic: EMAIL_SENDING_TASKS
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    topic: ${KAFKA_TOPIC}
 
 task-tracker-backend:
   jwt:
-    secret_key: 31d16798f9eb4e38b82687846e5f7d67a12a5e016244a730aeff5a2a26db0da1
-    access_token_expiration: 1d
+    secret_key: ${JWT_SECRET}
+    access_token_expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
 
 logging:
   level:

@@ -2,10 +2,10 @@ spring:
   application:
     name: task-tracker-email-sender
   mail:
-    host: smtp.mail.ru
-    port: 587
-    username: tasktracker-1@mail.ru
-    password: MWSKTXodLtfmiuLUT09a
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -14,8 +14,8 @@ spring:
             enable: true
 
   kafka:
-    bootstrap-servers: kafka:29092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    topic: ${KAFKA_TOPIC}
     consumer:
-      group-id: email-sender-consumer
+      group-id: ${KAFKA_CONSUMER_GROUP_ID}
       auto-offset-reset: earliest
-    topic: EMAIL_SENDING_TASKS

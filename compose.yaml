@@ -2,9 +2,9 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: task_tracker
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5433:5432"
     volumes:
@@ -16,6 +16,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    env_file:
+      - .env
 
   backend-service:
     build: task-tracker-backend
@@ -26,16 +28,25 @@ services:
         condition: service_healthy
     networks:
       - spring-net
+    env_file:
+      - .env
 
   email-sender-service:
     build: task-tracker-email-sender
     networks:
       - spring-net
+    env_file:
+      - .env
 
   scheduler-service:
     build: task-tracker-scheduler
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - spring-net
+    env_file:
+      - .env
 
   kafka:
     image: apache/kafka:3.9.1
@@ -58,6 +69,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       CLUSTER_ID: 4Ocr70XGQeyfW7fVMsOUWA
+    env_file:
+      - .env
 
 volumes:
   postgres-data-1:

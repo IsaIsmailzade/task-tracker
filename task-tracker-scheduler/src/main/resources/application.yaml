@@ -3,23 +3,23 @@ spring:
     name: task-tracker-scheduler
 
   datasource:
-    url: jdbc:postgresql://db:5432/task_tracker
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     show-sql: true
     open-in-view: false
 
   kafka:
-    bootstrap-servers: kafka:29092
-    topic: EMAIL_SENDING_TASKS
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    topic: ${KAFKA_TOPIC}
 
 scheduler:
-  tasks-count-limit: 5
-  message-title: 'Task Tracker: Day''s Report'
-  cron: 0 0 0 * * ?
-  cron-new: '@daily'
+  cron: ${SCHEDULER_CRON}
+  cron-new: ${SCHEDULER_CRON_NEW}
+  tasks-count-limit: ${SCHEDULER_TASKS_COUNT_LIMIT}
+  message-title: ${SCHEDULER_MESSAGE_TITLE}
