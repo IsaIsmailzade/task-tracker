@@ -15,8 +15,8 @@ public class ReportService {
     private final MessageService messageService;
     private final UserService userService;
 
-    //    @Scheduled(fixedRate = 120000) // for method testing
-    @Scheduled(cron = "${scheduler.report-service.cron-new}")
+//    @Scheduled(fixedDelay = 120000) // for method testing
+    @Scheduled(cron = "${scheduler.cron-new}")
     public void sendReport() {
         List<User> users = userService.findAll();
 
