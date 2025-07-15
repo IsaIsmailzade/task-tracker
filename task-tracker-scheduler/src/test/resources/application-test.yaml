@@ -1,0 +1,20 @@
+spring:
+  kafka:
+    bootstrap-servers: dummy:9092
+    topic: test-topic
+    group-id: test-group
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+scheduler:
+  cron-new: '@daily'
+  tasks-count-limit: 5
