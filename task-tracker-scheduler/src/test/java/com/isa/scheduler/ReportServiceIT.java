@@ -64,6 +64,7 @@ public class ReportServiceIT {
         return props;
     }
 
+    @DisplayName("Should send message and receive it from Kafka")
     @Test
     void givenKafkaDockerContainer_whenSendingMessage_thenMessageReceived() {
         try (KafkaConsumer<Long, MessageDto> consumer = new KafkaConsumer<>(consumerConfigs())) {
