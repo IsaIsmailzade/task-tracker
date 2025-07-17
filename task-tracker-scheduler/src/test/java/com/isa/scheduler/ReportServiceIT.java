@@ -42,7 +42,7 @@ public class ReportServiceIT {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${spring.kafka.group-id}")
+    @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 
     @DynamicPropertySource
