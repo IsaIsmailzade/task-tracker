@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Testcontainers
 @ActiveProfiles("test")
-public class ReportServiceIT {
+public class KafkaProducerServiceIT {
     @Container
     static final KafkaContainer container = new KafkaContainer(DockerImageName.parse("apache/kafka-native"));
 
@@ -65,9 +65,9 @@ public class ReportServiceIT {
         return props;
     }
 
-    @DisplayName("Should send message and receive it from Kafka")
+    @DisplayName("KafkaProducer should successfully send message to topic")
     @Test
-    void givenKafkaDockerContainer_whenSendingMessage_thenMessageReceived() {
+    void givenValidMessage_whenSendingToKafka_thenMessageIsSentSuccessfully() {
         try (KafkaConsumer<Long, MessageDto> consumer = new KafkaConsumer<>(consumerConfigs())) {
             MessageDto messageDto = MessageDto.builder()
                     .email("test@gmail.com")
