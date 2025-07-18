@@ -51,20 +51,6 @@ public class KafkaProducerServiceIT {
         propertyRegistry.add("spring.kafka.bootstrap-servers", container::getBootstrapServers);
     }
 
-    private Map<String, Object> consumerConfigs() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, MessageDto.class);
-        props.put(JsonDeserializer.USE_TYPE_INFO_HEADERS, false);
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-
-        return props;
-    }
-
     @DisplayName("KafkaProducer should successfully send message to topic")
     @Test
     void givenValidMessage_whenSendingToKafka_thenMessageIsSentSuccessfully() {
@@ -84,5 +70,19 @@ public class KafkaProducerServiceIT {
             assertThat(record.value().getTitle()).isEqualTo("Test Title");
             assertThat(record.value().getMessage()).isEqualTo("Test message");
         }
+    }
+
+    private Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, MessageDto.class);
+        props.put(JsonDeserializer.USE_TYPE_INFO_HEADERS, false);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+
+        return props;
     }
 }
