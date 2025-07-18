@@ -1,0 +1,24 @@
+spring:
+  mail:
+    host: test-host
+    port: 000
+    username: test
+    password: test
+
+  kafka:
+    bootstrap-servers: dummy:9092
+    topic: test-topic
+    consumer:
+      group-id: test-group
+      auto-offset-reset: earliest
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
