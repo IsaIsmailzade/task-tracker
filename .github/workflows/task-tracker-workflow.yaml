@@ -2,9 +2,9 @@ name: Build and Push Docker Images
 on:
   push:
     paths:
-      - 'task-tracker-backend/src/**'
-      - 'task-tracker-email-sender/src/**'
-      - 'task-tracker-scheduler/src/**'
+      - 'task-tracker-backend/**'
+      - 'task-tracker-email-sender/**'
+      - 'task-tracker-scheduler/**'
     branches:
       - master
 
