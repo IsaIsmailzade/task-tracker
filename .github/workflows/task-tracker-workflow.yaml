@@ -1,4 +1,4 @@
-name: Build and Push Docker Images
+name: Build and Deploy Project
 on:
   push:
     paths:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -41,3 +41,20 @@ jobs:
           context: ./task-tracker-scheduler
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/scheduler-service:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/task-tracker
+            docker compose pull
+            docker compose down
+            docker compose up -d
