@@ -53,7 +53,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: task-tracker/compose.yaml
+          source: compose.yaml
           target: /root/task-tracker/
 
       - name: Copy .env file to server
