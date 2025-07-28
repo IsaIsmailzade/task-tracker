@@ -47,6 +47,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Copy compose.yaml to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: task-tracker/compose.yaml
+          target: /root/task-tracker/
+
+      - name: Copy .env file to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: .env
+          target: /root/task-tracker/
+
       - name: Deploy to Server via SSH
         uses: appleboy/ssh-action@v1
         with:
@@ -54,7 +72,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/task-tracker
+            cd /root/task-tracker
             docker compose pull
             docker compose down
             docker compose up -d
