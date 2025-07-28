@@ -47,6 +47,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
       - name: Copy compose.yaml to server
         uses: appleboy/scp-action@v1
         with:
