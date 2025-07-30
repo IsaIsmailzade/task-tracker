@@ -50,6 +50,15 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Create .env file on the server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "${{ secrets.ENV_FILE_CONTENT }}" > /root/task-tracker/.env
+
       - name: Copy compose.yaml to server
         uses: appleboy/scp-action@v1
         with:
@@ -57,15 +66,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: compose.yaml
-          target: /root/task-tracker/
-
-      - name: Copy .env file to server
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: .env
           target: /root/task-tracker/
 
       - name: Deploy to Server via SSH
