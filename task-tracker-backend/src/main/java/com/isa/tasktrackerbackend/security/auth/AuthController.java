@@ -1,5 +1,6 @@
 package com.isa.tasktrackerbackend.security.auth;
 
+import com.isa.tasktrackerbackend.config.swagger.AuthControllerDoc;
 import com.isa.tasktrackerbackend.security.dto.AuthRequestDto;
 import com.isa.tasktrackerbackend.security.dto.RegisterRequestDto;
 import com.isa.tasktrackerbackend.security.dto.ResponseDto;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements AuthControllerDoc {
     private final AuthService authService;
 
     @PostMapping("/user")

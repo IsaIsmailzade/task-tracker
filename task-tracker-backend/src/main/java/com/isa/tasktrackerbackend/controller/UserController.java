@@ -1,5 +1,6 @@
 package com.isa.tasktrackerbackend.controller;
 
+import com.isa.tasktrackerbackend.config.swagger.UserControllerDoc;
 import com.isa.tasktrackerbackend.dto.CurrentUserDto;
 import com.isa.tasktrackerbackend.model.User;
 import com.isa.tasktrackerbackend.service.UserService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @SecurityRequirement(name = "BearerAuth")
-public class UserController {
+public class UserController implements UserControllerDoc {
     private final UserService userService;
 
     @GetMapping("/user")
