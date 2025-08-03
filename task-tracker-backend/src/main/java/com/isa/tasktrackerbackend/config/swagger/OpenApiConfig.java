@@ -1,4 +1,4 @@
-package com.isa.tasktrackerbackend.config;
+package com.isa.tasktrackerbackend.config.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -9,7 +9,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @Info(title = "Task Tracker API", version = "1.0"),
+        info = @Info(
+                title = "Task Tracker API",
+                description = "System API for task scheduling",
+                version = "1.0"
+        ),
         security = @SecurityRequirement(name = "BearerAuth")
 )
 @SecurityScheme(
