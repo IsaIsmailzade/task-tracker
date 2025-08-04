@@ -33,6 +33,7 @@ Task Tracker API — это современное решение для упр�
 - **JUnit & Mockito**
 - **Testcontainers**
 - **Docker**
+- **Swagger (OpenAPI)**
 - **CI/CD, GitHub Actions**
 
 
