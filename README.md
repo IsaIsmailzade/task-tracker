@@ -134,7 +134,7 @@ Task Tracker API — это современное решение для упр�
 
 6. **Запустите приложение:**
    ```bash
-   docker-compose up -d
+   docker-compose -f compose-local.yaml up --build
    ```
 
 
